@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+## 프로젝트 개요
+---
+웹 퍼즐 게임 Wordle App(https://www.nytimes.com/games/wordle/index.html)의 클론 앱입니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 시작
+---
+```
+    npm start
+```
 
-## Available Scripts
+### 플레이 방법
+---
+* 초기 화면
+![image](https://user-images.githubusercontent.com/39260956/159024110-6171d07e-d9fc-491a-9ac9-e15e06520f1d.png)
 
-In the project directory, you can run:
+- Wordle은 랜덤으로 지정된 5글자의 단어를 6번의 시도 안에 맞추는 게임입니다.
+- 정답은 전부 실존하는 5글자의 단어로 입력해야 합니다.  
+※ 길이가 부족하거나, 존재하지 않는 단어일 경우 정답으로 제출되지 않습니다!
+- 키보드나 화면 하단의 키보드 버튼을 사용해서 정답을 입력하세요.  
+ 
+![image](https://user-images.githubusercontent.com/39260956/159025100-ade3338f-4f3f-4b65-8b4d-fb5ed496f7be.png)
 
-### `npm start`
+- 제출한 단어의 문자가 정답에 포함되어 있을 경우 노란색, 위치까지 일치할 경우 초록색, 존재하지 않을 경우 회색으로 표현됩니다.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://user-images.githubusercontent.com/39260956/159025028-aac41611-0765-4875-bf83-7620a21bc53d.png)  
+- 정답을 맞출 경우 친구들에게 결과를 공유할 수 있습니다.  
+```  
+Wordle 2022-03-18 23:48:02 3/6  
+🟨🟨⬛⬛⬛  
+⬛⬛⬛🟨🟨  
+🟩🟩🟩🟩🟩  
+⬜⬜⬜⬜⬜  
+⬜⬜⬜⬜⬜  
+⬜⬜⬜⬜⬜  
+```  
+![image](https://user-images.githubusercontent.com/39260956/159025580-8fdbce15-9435-43f2-a1c1-077cbd8806ce.png)  
+- 6번의 시도 이내 맞추지 못할 경우 정답을 알려드립니다.
