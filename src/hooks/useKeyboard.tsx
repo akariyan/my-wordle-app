@@ -68,37 +68,59 @@ export function useKeyboard(
           resultFlag = false;
           stopTimer();
         } else {
-          // 정답 체크
-          const tileList = boardData[currentRow].map((item, index) => {
-            if (item.data === answer[index]) {
-              // 완전 일치
-              return TILE_STATE_CORRECT;
-            } else if (answer.includes(item.data)) {
-              // 포함
-              if (word.indexOf(item.data) !== word.lastIndexOf(item.data)) {
-                // 입력받은 단어에서 같은 글자 중복
-                if (
-                  answer.indexOf(item.data) !== answer.lastIndexOf(item.data)
-                ) {
-                  // 정답에서 중복되는 글자가 있을 경우
-                  return TILE_STATE_SIMILAR;
-                } else if (
-                  index >= word.lastIndexOf(item.data) ||
-                  answer.lastIndexOf(item.data) === word.lastIndexOf(item.data)
-                ) {
-                  //  앞은 유사 판정인데 뒤는 일치 판정일 경우
-                  return TILE_STATE_WRONG;
-                } else {
-                  return TILE_STATE_SIMILAR;
-                }
-              } else {
-                return TILE_STATE_SIMILAR;
-              }
-            } else {
-              return TILE_STATE_WRONG;
-            }
+          // 타일 색 변화용 정답 리스트
+          let tileList: string[] = [
+            TILE_STATE_WRONG,
+            TILE_STATE_WRONG,
+            TILE_STATE_WRONG,
+            TILE_STATE_WRONG,
+            TILE_STATE_WRONG,
+          ];
+          // 정답 단어
+          const answerWord = new Map<number, string>();
+          answer.split("").forEach((item, index) => {
+            answerWord.set(index, item);
           });
+          const inputedWord = new Map<number, string>();
+          boardData[currentRow].forEach((item, index) => {
+            inputedWord.set(index, item.data);
+          });
+          //  1단계 : 입력받은 단어의 i번째 문자와 정답의 i번째 문자가 일치할 경우 해당 문자는 일치로 체크 후 삭제
+          for (let i = 0; i < 5; i++) {
+            if (inputedWord.get(i) === answerWord.get(i)) {
+              tileList[i] = TILE_STATE_CORRECT;
+              answerWord.delete(i);
+              inputedWord.delete(i);
+            }
+          }
+          //  2단계 : 입력받은 단어와 정답을 순회하면서
+          for (let i = 0; i < 5; i++) {
+            //  체크된 문자는 넘기기
+            if (!inputedWord.has(i)) {
+              continue;
+            } else {
+              for (let j = 0; j < 5; j++) {
+                //  체크된 문자는 넘기기
+                if (!answerWord.has(j)) {
+                  continue;
+                } else {
+                  //  입력받은 단어의 i번째 문자가 정답의 j번째 문자와 일치할 경우 유사로 체크 후 삭제
+                  if (inputedWord.get(i) === answerWord.get(j)) {
+                    tileList[i] = TILE_STATE_SIMILAR;
+                    inputedWord.delete(i);
+                    answerWord.delete(j);
+                    break;
+                  } else {
+                    continue;
+                  }
+                }
+              }
+            }
+          }
+          //  3단계 : 체크 결과 제출
           checkTile(tileList);
+
+          //  모달 출력
           if (currentRow === 5) {
             if (setModal) {
               setModal(true);

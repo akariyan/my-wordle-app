@@ -7,6 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { useKeyboard } from "src/hooks/useKeyboard";
 import Modal from "react-modal";
 import { FiShare2 } from "react-icons/fi";
+import {
+  TILE_STATE_CORRECT,
+  TILE_STATE_SIMILAR,
+  TILE_STATE_WRONG,
+} from "src/Constants/constants";
 
 const StyledContainer = styled.div`
   text-align: center;
@@ -93,10 +98,16 @@ const StyledShareButton = styled.button`
 
 // 정답과의 일치 여부에 따른 색상 클래스 추가
 function checkColor(tile: TileInfo) {
-  if (tile.isCorrect) return "correct-tile";
-  else if (tile.isSimilar) return "similar-tile";
-  else if (tile.isWrong) return "wrong-tile";
-  return "nothing-tile";
+  switch (tile.state) {
+    case TILE_STATE_CORRECT:
+      return "correct-tile";
+    case TILE_STATE_SIMILAR:
+      return "similar-tile";
+    case TILE_STATE_WRONG:
+      return "wrong-tile";
+    default:
+      return "nothing-tile";
+  }
 }
 
 function Board() {
@@ -125,10 +136,20 @@ function Board() {
     boardData.forEach((row) => {
       resultText += "\n";
       row.forEach((tile) => {
-        if (tile.isCorrect) resultText += "🟩";
-        else if (tile.isSimilar) resultText += "🟨";
-        else if (tile.isWrong) resultText += "⬛";
-        else resultText += "⬜";
+        switch (tile.state) {
+          case TILE_STATE_CORRECT:
+            resultText += "🟩";
+            break;
+          case TILE_STATE_SIMILAR:
+            resultText += "🟨";
+            break;
+          case TILE_STATE_WRONG:
+            resultText += "⬛";
+            break;
+          default:
+            resultText += "⬜";
+            break;
+        }
       });
     });
     return resultText;

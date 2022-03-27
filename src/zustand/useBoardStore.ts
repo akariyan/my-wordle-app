@@ -1,4 +1,3 @@
-//  게임 정보 저장 Store
 import create from "zustand";
 import {
   INIT_TILE_INFO,
@@ -10,6 +9,7 @@ import {
 import { TileInfo } from "../types/Tiles";
 import AnswerList from "../words.json";
 
+//  게임 정보 저장 Store
 interface BoardData {
   currentTime: number;
   timer: NodeJS.Timer;
@@ -103,17 +103,17 @@ const useBoardStore = create<BoardData>((set) => ({
       tileType.forEach((item, index) => {
         switch (item) {
           case TILE_STATE_CORRECT:
-            newBoardData[state.currentRow][index].isCorrect = true;
+            newBoardData[state.currentRow][index].state = TILE_STATE_CORRECT;
             if (newCorrectList.indexOf(item) === -1)
               newCorrectList += newBoardData[state.currentRow][index].data;
             break;
           case TILE_STATE_SIMILAR:
-            newBoardData[state.currentRow][index].isSimilar = true;
+            newBoardData[state.currentRow][index].state = TILE_STATE_SIMILAR;
             if (newSimilarList.indexOf(item) === -1)
               newSimilarList += newBoardData[state.currentRow][index].data;
             break;
           case TILE_STATE_WRONG:
-            newBoardData[state.currentRow][index].isWrong = true;
+            newBoardData[state.currentRow][index].state = TILE_STATE_WRONG;
             if (newWrongList.indexOf(item) === -1)
               newWrongList += newBoardData[state.currentRow][index].data;
             break;
